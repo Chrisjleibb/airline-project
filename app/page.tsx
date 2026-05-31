@@ -211,7 +211,7 @@ export default function Page() {
           />
         ))}
       
-        <button className="BookFlightButton" type="submit">
+        <button className="BookFlightButton" type="submit" onClick={() => router.push("/api/userbookingspage")}>
           Book selected flight
         </button>
         </form>
