@@ -133,7 +133,7 @@ export default function Page() {
     alert("Booking successful");
 
     
-   // router.push(`/userbookingspage/${json.bookingRef}`); 
+    router.push(`/userbookingspage/${json.bookingRef}`); 
 
     // refresh results
     searchFlights();
@@ -211,7 +211,7 @@ export default function Page() {
           />
         ))}
       
-        <button className="BookFlightButton" type="submit" onClick={() => router.push("/api/userbookingspage")}>
+        <button className="BookFlightButton" type="submit">
           Book selected flight
         </button>
         </form>
