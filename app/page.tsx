@@ -133,7 +133,7 @@ export default function Page() {
     alert("Booking successful");
 
     
-    router.push(`/userbookingspage/${json.bookingRef}`); 
+    router.push("/api/userbookingspage"); 
 
     // refresh results
     searchFlights();
