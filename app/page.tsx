@@ -162,9 +162,10 @@ export default function Page() {
   return (
     
     <div style={{ padding: 20 }}>
-      <div className="background">
+      <div className="top-image"></div>
+      
 
-      </div>
+      
       <h1 className = "Flight-search"> Search Flights</h1>
 
     <div className = "searchwrapper">
@@ -218,7 +219,7 @@ export default function Page() {
       </p>
     </div>
      
-    {loading && <h3>Loading flights...</h3>}
+    {loading && <h1>Loading flights...</h1>}
       <form onSubmit={handleSubmit}>
         {/* <p>Select a flight:</p> */}
 
@@ -239,7 +240,7 @@ export default function Page() {
         Book selected flight
         </button>
 
-         {bookingLoading && <h3>Booking...</h3>}
+         {bookingLoading && <h1>Booking...</h1>}
         
         </form>
         
