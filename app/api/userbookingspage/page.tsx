@@ -88,7 +88,7 @@ const [bookingMessage, SetBookingMessage] = useState("");
       <h1 className = "title">My Bookings</h1>
       {bookingsLoading && <h1>Loading your bookings...</h1>}
       {bookingMessage && (
-        <p className="booking-message">
+        <p className="title">
             {bookingMessage}
         </p>
         )}
