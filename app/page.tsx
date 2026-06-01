@@ -255,7 +255,7 @@ export default function Page() {
         Book selected flight
         </button>
 
-         {bookingLoading && <h1 className="title">Booking...</h1>}
+         {bookingLoading && <h1 style={{ fontSize: "30px" }}>Booking...</h1>}
         
         </form>
         

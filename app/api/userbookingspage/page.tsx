@@ -80,12 +80,18 @@ const [bookingMessage, SetBookingMessage] = useState("");
   return (
     
     <div style={{ padding: 20 }}>
-        {bookingsLoading && <h1>Loading your bookings...</h1>}
+        
 
         <button className="backbutton" onClick={() => router.push("/")}>
           Back
         </button>
       <h1 className = "title">My Bookings</h1>
+      {bookingsLoading && <h1>Loading your bookings...</h1>}
+      {bookingMessage && (
+        <p className="booking-message">
+            {bookingMessage}
+        </p>
+        )}
 
     <div className = "bookingswrapper">
       {bookings.map((b: Booking) => (
