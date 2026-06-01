@@ -77,6 +77,7 @@ export default function Page() {
 
   const [flight, setFlight] = useState("");
   const [loading, setLoading] = useState(false);
+  const [searchMessage, setSearchMessage] = useState("");
   /* ---------------- SEARCH ---------------- */
 
   const searchFlights = async () => {
@@ -102,7 +103,11 @@ export default function Page() {
 
     const res = await fetch(`/api/schedules?${params}`);
     const json = await res.json();
-
+    if (json.entries.length === 0) {
+      setSearchMessage("No flights found for the selected route and dates.");
+    } else {
+      setSearchMessage("");
+    }
     setData(json);
   } finally {
     setLoading(false);
@@ -219,7 +224,13 @@ export default function Page() {
       </p>
     </div>
      
-    {loading && <h1>Loading flights...</h1>}
+    {loading && <h1 className="title">Loading flights...</h1>}
+    {searchMessage && (
+      <p className="search-message">
+        {searchMessage}
+      </p>
+    )}
+
       <form onSubmit={handleSubmit}>
         {/* <p>Select a flight:</p> */}
 
@@ -240,7 +251,7 @@ export default function Page() {
         Book selected flight
         </button>
 
-         {bookingLoading && <h1>Booking...</h1>}
+         {bookingLoading && <h1 className="title">Booking...</h1>}
         
         </form>
         

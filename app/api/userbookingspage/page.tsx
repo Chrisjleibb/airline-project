@@ -48,25 +48,39 @@ export default function Page() {
     );
     };
 
-    const [Bookingsloading, SetBookingsLoading] = useState(false);
+    
+const [bookingsLoading, SetBookingsLoading]=useState(false);
+const [bookingMessage, SetBookingMessage] = useState("");
+
   useEffect(() => {
+  const loadBookings = async () => {
     SetBookingsLoading(true);
+
     try {
-    fetch("/api/bookings?passengerId=TEST_PASSENGER_ID")
-      .then(res => res.json())
-      .then(data => setBookings(data));
+      const res = await fetch(
+        "/api/bookings?passengerId=TEST_PASSENGER_ID"
+      );
+
+      const data = await res.json();
+      if (data.length === 0) {
+        SetBookingMessage("You have no current bookings.");
+        } 
+      else {
+        SetBookingMessage("");
+        }
+      setBookings(data);
     } finally {
-        SetBookingsLoading(false);
+      SetBookingsLoading(false);
     }
-  }, []);
+  };
+
+  loadBookings();
+}, []);
 
   return (
     
     <div style={{ padding: 20 }}>
-        {Bookingsloading && <h3>Loading your bookings...</h3>}
-        
-        <div className="background"> </div>
-
+        {bookingsLoading && <h1>Loading your bookings...</h1>}
 
         <button className="backbutton" onClick={() => router.push("/")}>
           Back
