@@ -200,12 +200,11 @@ export default function Page() {
 
       <button
         className="SearchFlightButton"
-        onClick={searchFlights}
-        disabled={loading}
-      >
-        {loading ? "Searching..." : "Search"}
+        onClick={searchFlights}>
+        Search
+      
       </button>
-
+      {loading && <h3>Loading flights...</h3>}
       
       </div>
 
@@ -234,10 +233,13 @@ export default function Page() {
         <button
           className="BookFlightButton"
           type="submit"
-          disabled={bookingLoading}
-        >
-          {bookingLoading ? "Booking..." : "Book selected flight"}
+          disabled={bookingLoading}>
+
+        Book selected flight
         </button>
+
+         {bookingLoading && <h3>Booking...</h3>}
+        
         </form>
         
         <button
