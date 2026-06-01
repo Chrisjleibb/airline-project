@@ -204,9 +204,10 @@ export default function Page() {
         Search
       
       </button>
-      {loading && <h3>Loading flights...</h3>}
+      
       
       </div>
+      
 
       <div className = "flyingwrapper">
       <p>
@@ -217,7 +218,7 @@ export default function Page() {
       </p>
     </div>
      
-
+    {loading && <h3>Loading flights...</h3>}
       <form onSubmit={handleSubmit}>
         {/* <p>Select a flight:</p> */}
 
