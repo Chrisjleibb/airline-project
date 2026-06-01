@@ -19,6 +19,7 @@ export default function Page() {
   const [bookings, setBookings] = useState<Booking[]>([]);
  const router = useRouter();
 
+ //Function to cancel bookings. Activated upon button press.
     const cancelBooking = async (booking: Booking) => {
 
     const res = await fetch("/api/cancel", {
@@ -50,30 +51,33 @@ export default function Page() {
 
     function getPrice(orig: string, dest: string) {
   const route = `${orig}-${dest}`;
-
+//Generate appropriate prices depending upon flights
+//These numbers were randomly chosen 
   const prices: Record<string, number> = {
-    "NZNE-YSSY": 750,
-    "YSSY-NZNE": 750,
+    "NZNE-YSSY": 812,
+    "YSSY-NZNE": 812,
 
-    "NZNE-NZRO": 120,
-    "NZRO-NZNE": 120,
+    "NZNE-NZRO": 119,
+    "NZRO-NZNE": 119,
 
-    "NZNE-NZGB": 180,
-    "NZGB-NZNE": 180,
+    "NZNE-NZGB": 183,
+    "NZGB-NZNE": 183,
 
-    "NZNE-NZCI": 950,
-    "NZCI-NZNE": 950,
+    "NZNE-NZCI": 789,
+    "NZCI-NZNE": 789,
 
-    "NZNE-NZTL": 320,
-    "NZTL-NZNE": 320,
+    "NZNE-NZTL": 314,
+    "NZTL-NZNE": 314,
   };
 
   return prices[route] ?? 200;
 }
 
 
-    
+//Bookings can take a few seconds to load so loading state needed.    
 const [bookingsLoading, SetBookingsLoading]=useState(false);
+
+//In case there are no bookings currently
 const [bookingMessage, SetBookingMessage] = useState("");
 
   useEffect(() => {
@@ -102,7 +106,7 @@ const [bookingMessage, SetBookingMessage] = useState("");
 }, []);
 
   return (
-    
+    //Return booking card that shows the users booking reference, price and other relevant information.
     <div style={{ padding: 20 }}>
         
 

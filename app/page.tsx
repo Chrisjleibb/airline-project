@@ -1,11 +1,15 @@
+// ---------------- Assignment 2 ---------------- 
+// Name: Christian Leibbrandt StudentId: 24018030
+// Link to Vercel platform: https://airline-project-phi.vercel.app
+
+
 "use client";
 
 import "./globals.css";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 
-/* ---------------- TYPES ---------------- */
-
+//Satisfy type script 
 interface FlightEntry {
   _id: string;
   flight_no: string;
@@ -14,7 +18,7 @@ interface FlightEntry {
   seats_avail: boolean;
 }
 
-/* ---------------- RADIO COMPONENT ---------------- */
+// Radio Components
 
 
 const FlightOption = ({entry, tz, onChange,}: {
@@ -57,7 +61,7 @@ const FlightOption = ({entry, tz, onChange,}: {
   );
 };
 
-/* ---------------- MAIN PAGE ---------------- */
+// Main Page
 
 
 export default function Page() {
@@ -78,7 +82,8 @@ export default function Page() {
   const [flight, setFlight] = useState("");
   const [loading, setLoading] = useState(false);
   const [searchMessage, setSearchMessage] = useState("");
-  /* ---------------- SEARCH ---------------- */
+
+  // Search implementation 
 
   const searchFlights = async () => {
      if (!orig || !dest) {
@@ -114,7 +119,9 @@ export default function Page() {
   }
 };
 
-  /* ---------------- BOOKING ---------------- */
+// Booking implementation
+
+//Loading feature
   const [bookingLoading, setBookingLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -135,7 +142,7 @@ export default function Page() {
       },
       body: JSON.stringify({
         flightId: flight,
-        passengerId: "TEST_PASSENGER_ID",
+        passengerId: "TEST_PASSENGER_ID", //Passenger id string. This string could be anything 
       }),
     });
 
@@ -152,7 +159,7 @@ export default function Page() {
      router.push("/api/userbookingspage");
     
 
-    // refresh results
+    // show results again after booking 
     searchFlights();
   } catch (err) {
     alert("Something went wrong");
@@ -163,14 +170,18 @@ export default function Page() {
   };
 
 
-  /* ---------------- UI ---------------- */
-
+ // User interface
+   //User interface with a search implementation that allows users to pick origin and destination airports
+   //from drop down lists using <select> attributes
+   //Displays search results as selectable radio buttons.
+   //User can only pick one radio button.
+   //The same flight cannot be booked twice and some flights are full. When i populated the database I used random numbers to do so. 
+   //Those randoms numbers could go high enough to fill up a plane depeding on how many seats a plane has
+   //If the user makes a successful booking that bookings page while be shown with the relevant information.
   return (
     
     <div style={{ padding: 20 }}>
-      <div className="top-image"></div>
-      
-
+      <div className="top-image"></div> 
       
       <h1 className = "Flight-search"> Search Flights</h1>
 

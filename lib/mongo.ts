@@ -1,3 +1,4 @@
+//Connect to the mongodb database
 import { MongoClient } from "mongodb";
 
 const URI = process.env.MONGODB_URI!;

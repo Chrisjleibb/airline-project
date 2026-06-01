@@ -18,6 +18,7 @@ type Schedule = {
   bookings: Booking[];
 };
 
+//Find booking by reference and passengerId and delete
 export async function POST(req: Request) {
 
     try {
@@ -53,7 +54,7 @@ export async function POST(req: Request) {
             );
         }
 
-        // optional safety: ensure correct passenger
+        // ensure correct passenger
         if (existing.passengerId !== passengerId) {
             return Response.json(
                 { error: "Not your booking" },
@@ -61,7 +62,7 @@ export async function POST(req: Request) {
             );
         }
 
-        // cancel booking
+        // delete booking
         await schedules.updateOne(
             { _id: new ObjectId(flightId) },
             {

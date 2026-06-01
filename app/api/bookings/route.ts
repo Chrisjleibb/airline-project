@@ -2,6 +2,7 @@
 import { connectDB } from "@/lib/mongo";
 import { ObjectId } from "mongodb";
 
+//Generate random booking reference function
 function generateBookingRef() {
 
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -32,6 +33,7 @@ type Schedule = {
   bookings: Booking[];
 };
 
+//make booking 
 export async function POST(req: Request) {
 
     try {
@@ -111,6 +113,7 @@ export async function POST(req: Request) {
     }
 }
 
+//find booking 
 export async function GET(req: Request) {
 
     const params = new URL(req.url).searchParams;
