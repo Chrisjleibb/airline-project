@@ -48,6 +48,30 @@ export default function Page() {
     );
     };
 
+    function getPrice(orig: string, dest: string) {
+  const route = `${orig}-${dest}`;
+
+  const prices: Record<string, number> = {
+    "NZNE-YSSY": 750,
+    "YSSY-NZNE": 750,
+
+    "NZNE-NZRO": 120,
+    "NZRO-NZNE": 120,
+
+    "NZNE-NZGB": 180,
+    "NZGB-NZNE": 180,
+
+    "NZNE-NZCI": 950,
+    "NZCI-NZNE": 950,
+
+    "NZNE-NZTL": 320,
+    "NZTL-NZNE": 320,
+  };
+
+  return prices[route] ?? 200;
+}
+
+
     
 const [bookingsLoading, SetBookingsLoading]=useState(false);
 const [bookingMessage, SetBookingMessage] = useState("");
@@ -86,7 +110,7 @@ const [bookingMessage, SetBookingMessage] = useState("");
           Back
         </button>
       <h1 className = "title">My Bookings</h1>
-      {bookingsLoading && <h1>Loading your bookings...</h1>}
+      {bookingsLoading && <h1 style={{ fontSize: "30px" }}>Loading your bookings...</h1>}
       {bookingMessage && (
         <p className="title">
             {bookingMessage}
@@ -99,6 +123,7 @@ const [bookingMessage, SetBookingMessage] = useState("");
           <p>Booking Ref: {b.bookingRef}</p>
           <p>{b.flightNo}</p>
           <p>{b.orig} → {b.dest}</p>
+          <p>Price: ${getPrice(b.orig, b.dest)}</p>
           <p>{new Date(b.depDate).toLocaleString()}</p>
 
           <button className="CancelBookingButton"

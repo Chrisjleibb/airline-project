@@ -149,7 +149,8 @@ export default function Page() {
     alert("Booking successful");
 
     
-    router.push("/api/userbookingspage");
+     router.push("/api/userbookingspage");
+    
 
     // refresh results
     searchFlights();
