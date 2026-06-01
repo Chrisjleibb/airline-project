@@ -224,7 +224,11 @@ export default function Page() {
       </p>
     </div>
      
-    {loading && <h1 className="title">Loading flights...</h1>}
+    {loading && (
+      <h1 style={{ fontSize: "30px" }}>
+        Loading flights...
+      </h1>
+    )}
     {searchMessage && (
       <p className="search-message">
         {searchMessage}
