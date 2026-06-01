@@ -76,7 +76,7 @@ export default function Page() {
   });
 
   const [flight, setFlight] = useState("");
-
+  const [loading, setLoading] = useState(false);
   /* ---------------- SEARCH ---------------- */
 
   const searchFlights = async () => {
@@ -89,6 +89,10 @@ export default function Page() {
     alert("Origin and destination cannot be the same");
     return;
   }
+
+  setLoading(true);
+
+  try {
     const params = new URLSearchParams({
       orig,
       dest,
@@ -100,10 +104,14 @@ export default function Page() {
     const json = await res.json();
 
     setData(json);
-  };
+  } finally {
+    setLoading(false);
+  }
+};
 
   /* ---------------- BOOKING ---------------- */
-  
+  const [bookingLoading, setBookingLoading] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -112,6 +120,9 @@ export default function Page() {
       return;
     }
 
+    setBookingLoading(true);
+
+    try {
     const res = await fetch("/api/bookings", {
       method: "POST",
       headers: {
@@ -137,6 +148,11 @@ export default function Page() {
 
     // refresh results
     searchFlights();
+  } catch (err) {
+    alert("Something went wrong");
+  } finally {
+    setBookingLoading(false);
+  }
     
   };
 
@@ -182,9 +198,13 @@ export default function Page() {
       <input type="date" onChange={(e) => setDate1(e.target.value)} />
       <input type="date" onChange={(e) => setDate2(e.target.value)} />
 
-      <button className="SearchFlightButton" onClick={searchFlights}>
-        Search
-        </button>
+      <button
+        className="SearchFlightButton"
+        onClick={searchFlights}
+        disabled={loading}
+      >
+        {loading ? "Searching..." : "Search"}
+      </button>
 
       
       </div>
@@ -211,8 +231,12 @@ export default function Page() {
           />
         ))}
       
-        <button className="BookFlightButton" type="submit">
-          Book selected flight
+        <button
+          className="BookFlightButton"
+          type="submit"
+          disabled={bookingLoading}
+        >
+          {bookingLoading ? "Booking..." : "Book selected flight"}
         </button>
         </form>
         
